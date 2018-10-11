@@ -2,6 +2,7 @@
 .svn
 hrm.iml
 target
+erp.iml
 base/app/*.log
 sso.iml
 sangfor-sso.iml

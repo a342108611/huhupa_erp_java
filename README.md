@@ -1,4 +1,4 @@
-# sangfor-sso
+# huhupa_erp
 
 ### 1、运行redis，密码设为 huhupa<br>
 ### 2、使用idea 打开项目<br>
