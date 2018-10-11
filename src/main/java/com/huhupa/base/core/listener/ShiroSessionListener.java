@@ -17,13 +17,13 @@ public class ShiroSessionListener implements SessionListener {
 
     @Override
     public void onStart(Session session) {
-        System.out.println("创建shiroSessionRepository:" + getShiroSessionRepository());
+        //System.out.println("创建shiroSessionRepository:" + getShiroSessionRepository());
         LoggerUtils.error(getClass(), "session创建：" + session.getId());
     }
 
     @Override
     public void onStop(Session session) {
-        System.out.println("停止shiroSessionRepository:" + getShiroSessionRepository());
+        //System.out.println("停止shiroSessionRepository:" + getShiroSessionRepository());
         LoggerUtils.error(getClass(), "session停止：" + session.getId());
     }
 
