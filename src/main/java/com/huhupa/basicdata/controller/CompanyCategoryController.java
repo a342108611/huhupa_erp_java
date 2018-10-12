@@ -44,7 +44,7 @@ public class CompanyCategoryController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		companyCategoryService.deleteLogicById(id);
 		return new ResultObject();
 	}

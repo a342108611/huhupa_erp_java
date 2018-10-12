@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.CompanyService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class CompanyAccountController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(CompanyAccount companyAccount) {
+	public ResultObject add(@RequestBody CompanyAccount companyAccount) {
 		return new ResultObject(companyAccountService.save(companyAccount));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(CompanyAccount companyAccount) {
+	public ResultObject edit(@RequestBody CompanyAccount companyAccount) {
 		CompanyAccount update = companyAccountService.update(companyAccount);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class CompanyAccountController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(String id) {
+	public ResultObject delete(@RequestBody String id) {
 		companyAccountService.deleteLogicById(id);
 		return new ResultObject();
 	}

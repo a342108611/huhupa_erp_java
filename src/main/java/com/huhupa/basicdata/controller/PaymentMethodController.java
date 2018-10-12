@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.PaymentMethodService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class PaymentMethodController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(PaymentMethod paymentMethod) {
+	public ResultObject add(@RequestBody PaymentMethod paymentMethod) {
 		return new ResultObject(paymentMethodService.save(paymentMethod));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(PaymentMethod paymentMethod) {
+	public ResultObject edit(@RequestBody PaymentMethod paymentMethod) {
 		PaymentMethod update = paymentMethodService.update(paymentMethod);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class PaymentMethodController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		paymentMethodService.deleteLogicById(id);
 		return new ResultObject();
 	}

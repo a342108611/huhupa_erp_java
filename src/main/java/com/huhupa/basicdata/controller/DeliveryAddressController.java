@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.DeliveryAddressService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class DeliveryAddressController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(DeliveryAddress deliveryAddress) {
+	public ResultObject add(@RequestBody DeliveryAddress deliveryAddress) {
 		return new ResultObject(deliveryAddressService.save(deliveryAddress));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(DeliveryAddress deliveryAddress) {
+	public ResultObject edit(@RequestBody DeliveryAddress deliveryAddress) {
 		DeliveryAddress update = deliveryAddressService.update(deliveryAddress);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class DeliveryAddressController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(String id) {
+	public ResultObject delete(@RequestBody String id) {
 		deliveryAddressService.deleteLogicById(id);
 		return new ResultObject();
 	}

@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.DepartmentService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class DepartmentController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(Department department) {
+	public ResultObject add(@RequestBody Department department) {
 		return new ResultObject(departmentService.save(department));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(Department department) {
+	public ResultObject edit(@RequestBody Department department) {
 		Department update = departmentService.update(department);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class DepartmentController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		departmentService.deleteLogicById(id);
 		return new ResultObject();
 	}

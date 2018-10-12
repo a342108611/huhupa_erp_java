@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.ProductionTypeService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class ProductionTypeController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(ProductionType productionType) {
+	public ResultObject add(@RequestBody ProductionType productionType) {
 		return new ResultObject(productionTypeService.save(productionType));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(ProductionType productionType) {
+	public ResultObject edit(@RequestBody ProductionType productionType) {
 		ProductionType update = productionTypeService.update(productionType);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class ProductionTypeController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		productionTypeService.deleteLogicById(id);
 		return new ResultObject();
 	}

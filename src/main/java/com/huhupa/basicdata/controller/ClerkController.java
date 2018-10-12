@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.ClerkService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class ClerkController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(Clerk clerk) {
+	public ResultObject add(@RequestBody Clerk clerk) {
 		return new ResultObject(clerkService.save(clerk));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(Clerk clerk) {
+	public ResultObject edit(@RequestBody Clerk clerk) {
 		Clerk update = clerkService.update(clerk);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class ClerkController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(String id) {
+	public ResultObject delete(@RequestBody String id) {
 		clerkService.deleteLogicById(id);
 		return new ResultObject();
 	}

@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.WarehouseService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class WarehouseController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(Warehouse warehouse) {
+	public ResultObject add(@RequestBody Warehouse warehouse) {
 		return new ResultObject(warehouseService.save(warehouse));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(Warehouse warehouse) {
+	public ResultObject edit(@RequestBody Warehouse warehouse) {
 		Warehouse update = warehouseService.update(warehouse);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class WarehouseController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		warehouseService.deleteLogicById(id);
 		return new ResultObject();
 	}

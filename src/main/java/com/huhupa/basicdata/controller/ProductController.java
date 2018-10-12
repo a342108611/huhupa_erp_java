@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.ProductService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class ProductController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(Product product) {
+	public ResultObject add(@RequestBody Product product) {
 		return new ResultObject(productService.save(product));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(Product product) {
+	public ResultObject edit(@RequestBody Product product) {
 		Product update = productService.update(product);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class ProductController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(String id) {
+	public ResultObject delete(@RequestBody String id) {
 		productService.deleteLogicById(id);
 		return new ResultObject();
 	}

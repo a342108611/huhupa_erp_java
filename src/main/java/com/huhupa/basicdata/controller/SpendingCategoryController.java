@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.SpendingCategoryService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class SpendingCategoryController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(SpendingCategory spendingCategory) {
+	public ResultObject add(@RequestBody SpendingCategory spendingCategory) {
 		return new ResultObject(spendingCategoryService.save(spendingCategory));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(SpendingCategory spendingCategory) {
+	public ResultObject edit(@RequestBody SpendingCategory spendingCategory) {
 		SpendingCategory update = spendingCategoryService.update(spendingCategory);
 		return new ResultObject(update);
 	}
@@ -43,7 +44,7 @@ public class SpendingCategoryController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
+	public ResultObject delete(@RequestBody Integer id) {
 		spendingCategoryService.deleteLogicById(id);
 		return new ResultObject();
 	}

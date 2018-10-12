@@ -47,7 +47,7 @@ public class CompanyController extends BaseController {
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(Company company) {
+	public ResultObject edit(@RequestBody Company company) {
 		Company update = companyService.update(company);
 		return new ResultObject(update);
 	}
@@ -61,7 +61,7 @@ public class CompanyController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(String id) {
+	public ResultObject delete(@RequestBody String id) {
 		companyService.deleteLogicByUUID(id);
 		return new ResultObject();
 	}
