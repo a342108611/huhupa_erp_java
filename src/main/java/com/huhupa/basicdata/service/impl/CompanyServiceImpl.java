@@ -1,5 +1,6 @@
 package com.huhupa.basicdata.service.impl;
 
+import com.huhupa.base.common.utils.StringUtils;
 import com.huhupa.base.core.token.manager.TokenManager;
 import com.huhupa.base.dao.support.IBaseDao;
 import com.huhupa.base.service.support.impl.BaseServiceImpl;
@@ -12,6 +13,7 @@ import com.huhupa.basicdata.entity.PaymentMethod;
 import com.huhupa.basicdata.service.CompanyService;
 import com.huhupa.common.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 /**
@@ -59,5 +61,16 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 		company.setCompanyCategory(companyCategory);
 		company.setPaymentMethod(paymentMethod);
 		return save(company);
+	}
+
+	@Override
+	public Company findByUUID(String id) {
+		if (StringUtils.isBlank(id)) {
+			throw new RuntimeException("查询的id为空");
+		}
+		Company company = new Company();
+		company.setId(id);
+		Company one = companyDao.findOne(Example.of(company));
+		return one;
 	}
 }
