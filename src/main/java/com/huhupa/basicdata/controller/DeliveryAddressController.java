@@ -8,10 +8,7 @@ import com.huhupa.basicdata.service.DeliveryAddressService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,16 +32,16 @@ public class DeliveryAddressController extends BaseController {
 		return new ResultObject(update);
 	}
 
-	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/getById/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(String id) {
+	public ResultObject getById(@PathVariable String id) {
 		DeliveryAddress deliveryAddress = deliveryAddressService.findActiveById(id);
 		return new ResultObject(deliveryAddress);
 	}
 
-	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(@RequestBody String id) {
+	public ResultObject delete(@PathVariable String id) {
 		deliveryAddressService.deleteLogicById(id);
 		return new ResultObject();
 	}

@@ -52,16 +52,16 @@ public class CompanyController extends BaseController {
 		return new ResultObject(update);
 	}
 
-	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/getById/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(String id) {
+	public ResultObject getById(@PathVariable String id) {
 		Company company = companyService.findByUUID(id);
 		return new ResultObject(company);
 	}
 
-	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(@RequestBody String id) {
+	public ResultObject delete(@PathVariable String id) {
 		companyService.deleteLogicByUUID(id);
 		return new ResultObject();
 	}

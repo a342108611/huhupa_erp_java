@@ -8,10 +8,7 @@ import com.huhupa.basicdata.service.DepartmentService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,16 +32,16 @@ public class DepartmentController extends BaseController {
 		return new ResultObject(update);
 	}
 
-	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/getById/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(Integer id) {
+	public ResultObject getById(@PathVariable Integer id) {
 		Department department = departmentService.findActiveById(id);
 		return new ResultObject(department);
 	}
 
-	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(@RequestBody Integer id) {
+	public ResultObject delete(@PathVariable Integer id) {
 		departmentService.deleteLogicById(id);
 		return new ResultObject();
 	}
