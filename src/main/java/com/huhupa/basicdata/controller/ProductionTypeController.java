@@ -24,8 +24,7 @@ public class ProductionTypeController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(ProductionType productionType) {
-		productionTypeService.save(productionType);
-		return new ResultObject();
+		return new ResultObject(productionTypeService.save(productionType));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

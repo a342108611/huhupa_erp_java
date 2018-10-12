@@ -24,8 +24,7 @@ public class DeliveryAddressController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(DeliveryAddress deliveryAddress) {
-		deliveryAddressService.save(deliveryAddress);
-		return new ResultObject();
+		return new ResultObject(deliveryAddressService.save(deliveryAddress));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

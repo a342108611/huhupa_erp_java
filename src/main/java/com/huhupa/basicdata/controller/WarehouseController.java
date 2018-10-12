@@ -24,8 +24,7 @@ public class WarehouseController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Warehouse warehouse) {
-		warehouseService.save(warehouse);
-		return new ResultObject();
+		return new ResultObject(warehouseService.save(warehouse));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

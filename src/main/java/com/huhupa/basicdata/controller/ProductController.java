@@ -24,8 +24,7 @@ public class ProductController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Product product) {
-		productService.save(product);
-		return new ResultObject();
+		return new ResultObject(productService.save(product));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

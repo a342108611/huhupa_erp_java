@@ -24,8 +24,7 @@ public class DepartmentController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Department department) {
-		departmentService.save(department);
-		return new ResultObject();
+		return new ResultObject(departmentService.save(department));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

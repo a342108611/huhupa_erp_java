@@ -24,8 +24,7 @@ public class UnitController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Unit unit) {
-		unitService.save(unit);
-		return new ResultObject();
+		return new ResultObject(unitService.save(unit));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

@@ -24,8 +24,7 @@ public class IncomeCategoryController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(IncomeCategory incomeCategory) {
-		incomeCategoryService.save(incomeCategory);
-		return new ResultObject();
+		return new ResultObject(incomeCategoryService.save(incomeCategory));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

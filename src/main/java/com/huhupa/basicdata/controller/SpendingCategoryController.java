@@ -24,8 +24,7 @@ public class SpendingCategoryController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(SpendingCategory spendingCategory) {
-		spendingCategoryService.save(spendingCategory);
-		return new ResultObject();
+		return new ResultObject(spendingCategoryService.save(spendingCategory));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

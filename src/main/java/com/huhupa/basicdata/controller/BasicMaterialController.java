@@ -31,8 +31,7 @@ public class BasicMaterialController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(BasicMaterial basicMaterial) {
-		basicMaterialService.save(basicMaterial);
-		return new ResultObject();
+		return new ResultObject(basicMaterialService.save(basicMaterial));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

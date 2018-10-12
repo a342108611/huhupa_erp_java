@@ -24,8 +24,7 @@ public class EducationController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Education education) {
-		educationService.save(education);
-		return new ResultObject();
+		return new ResultObject(educationService.save(education));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)

@@ -24,8 +24,7 @@ public class PaymentMethodController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(PaymentMethod paymentMethod) {
-		paymentMethodService.save(paymentMethod);
-		return new ResultObject();
+		return new ResultObject(paymentMethodService.save(paymentMethod));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
