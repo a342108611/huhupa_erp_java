@@ -26,8 +26,10 @@ public class CompanyController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public ResultObject add(@RequestBody Map<String, Object> map) {
-		Company save = companyService.save(parameterTransformation(map), (Integer) map.get("companyCategoryId"),
-				(Integer) map.get("paymentMethodId"));
+		System.out.println("(Integer) map.get(\"companyCategoryId\"):" +  Integer.parseInt(map.get("companyCategoryId").toString()));
+		System.out.println("(Integer) map.get(\"paymentMethodId\")" +  Integer.parseInt(map.get("paymentMethodId").toString()));
+		Company save = companyService.save(parameterTransformation(map), Integer.parseInt(map.get("companyCategoryId").toString()),
+				Integer.parseInt(map.get("paymentMethodId").toString()));
 		return new ResultObject(save);
 	}
 
@@ -41,7 +43,7 @@ public class CompanyController extends BaseController {
 		company.setEmail((String) map.get("email"));
 		company.setAddress((String) map.get("address"));
 		company.setNote((String) map.get("note"));
-		company.setType((Integer) map.get("type"));
+		company.setType(Integer.parseInt(map.get("type").toString()));
 		return company;
 	}
 
