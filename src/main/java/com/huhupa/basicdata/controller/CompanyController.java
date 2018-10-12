@@ -24,8 +24,8 @@ public class CompanyController extends BaseController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResultObject add(Company company, Integer companyCategoryId, Integer paymentMethodId) {
-		companyService.save(company, companyCategoryId, paymentMethodId);
-		return new ResultObject();
+		Company save = companyService.save(company, companyCategoryId, paymentMethodId);
+		return new ResultObject(save);
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
