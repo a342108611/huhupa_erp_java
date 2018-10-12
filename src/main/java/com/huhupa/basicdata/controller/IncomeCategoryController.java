@@ -38,21 +38,21 @@ public class IncomeCategoryController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		IncomeCategory incomeCategory = incomeCategoryService.find(id);
+		IncomeCategory incomeCategory = incomeCategoryService.findActiveById(id);
 		return new ResultObject(incomeCategory);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		incomeCategoryService.delete(id);
+		incomeCategoryService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<IncomeCategory> all = incomeCategoryService.findAll();
+		List<IncomeCategory> all = incomeCategoryService.findAllActive();
 		return new ResultObject(all);
 	}
 }

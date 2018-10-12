@@ -37,22 +37,22 @@ public class CompanyAccountController extends BaseController {
 
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(Integer id) {
-		CompanyAccount companyAccount = companyAccountService.find(id);
+	public ResultObject getById(String id) {
+		CompanyAccount companyAccount = companyAccountService.findActiveById(id);
 		return new ResultObject(companyAccount);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
-		companyAccountService.delete(id);
+	public ResultObject delete(String id) {
+		companyAccountService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<CompanyAccount> all = companyAccountService.findAll();
+		List<CompanyAccount> all = companyAccountService.findAllActive();
 		return new ResultObject(all);
 	}
 }

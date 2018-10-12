@@ -38,21 +38,21 @@ public class UnitController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		Unit unit = unitService.find(id);
+		Unit unit = unitService.findActiveById(id);
 		return new ResultObject(unit);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		unitService.delete(id);
+		unitService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Unit> all = unitService.findAll();
+		List<Unit> all = unitService.findAllActive();
 		return new ResultObject(all);
 	}
 }

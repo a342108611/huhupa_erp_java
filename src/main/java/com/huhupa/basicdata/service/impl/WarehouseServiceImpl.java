@@ -6,6 +6,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.WarehouseDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Unit;
 import com.huhupa.basicdata.entity.Warehouse;
 import com.huhupa.basicdata.service.ClerkService;
@@ -48,11 +49,22 @@ public class WarehouseServiceImpl extends BaseServiceImpl<Warehouse, Integer> im
 
 	@Override
 	public List<Warehouse> findAllActive() {
-		return null;
+		Warehouse res = new Warehouse();
+		res.setValid(Global.ACTIVE);
+		return warehouseDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		Warehouse res = new Warehouse();
+		res.setId(id);
+		Warehouse one = warehouseDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			warehouseDao.saveAndFlush(one);
+		}
 	}
 }

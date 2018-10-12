@@ -6,6 +6,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.SpendingCategoryDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.ProductCategory;
 import com.huhupa.basicdata.entity.SpendingCategory;
 import com.huhupa.basicdata.service.ClerkService;
@@ -48,11 +49,22 @@ public class SpendingCategoryServiceImpl extends BaseServiceImpl<SpendingCategor
 
 	@Override
 	public List<SpendingCategory> findAllActive() {
-		return null;
+		SpendingCategory res = new SpendingCategory();
+		res.setValid(Global.ACTIVE);
+		return spendingCategoryDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		SpendingCategory res = new SpendingCategory();
+		res.setId(id);
+		SpendingCategory one = spendingCategoryDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			spendingCategoryDao.saveAndFlush(one);
+		}
 	}
 }

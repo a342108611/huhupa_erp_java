@@ -45,21 +45,21 @@ public class BasicMaterialController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		BasicMaterial basicMaterial = basicMaterialService.find(id);
+		BasicMaterial basicMaterial = basicMaterialService.findActiveById(id);
 		return new ResultObject(basicMaterial);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		basicMaterialService.delete(id);
+		basicMaterialService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<BasicMaterial> all = basicMaterialService.findAll();
+		List<BasicMaterial> all = basicMaterialService.findAllActive();
 		return new ResultObject(all);
 	}
 }

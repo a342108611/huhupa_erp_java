@@ -7,6 +7,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.ProductDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Product;
 import com.huhupa.basicdata.entity.ProductionType;
 import com.huhupa.basicdata.service.ClerkService;
@@ -49,11 +50,22 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Integer> implem
 
 	@Override
 	public List<Product> findAllActive() {
-		return null;
+		Product res = new Product();
+		res.setValid(Global.ACTIVE);
+		return productDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(String id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		Product res = new Product();
+		res.setId(id);
+		Product one = productDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			productDao.saveAndFlush(one);
+		}
 	}
 }

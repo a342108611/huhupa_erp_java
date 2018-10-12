@@ -6,6 +6,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.UnitDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.SpendingCategory;
 import com.huhupa.basicdata.entity.Unit;
 import com.huhupa.basicdata.service.ClerkService;
@@ -48,11 +49,22 @@ public class UnitServiceImpl extends BaseServiceImpl<Unit, Integer> implements U
 
 	@Override
 	public List<Unit> findAllActive() {
-		return null;
+		Unit res = new Unit();
+		res.setValid(Global.ACTIVE);
+		return unitDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		Unit res = new Unit();
+		res.setId(id);
+		Unit one = unitDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			unitDao.saveAndFlush(one);
+		}
 	}
 }

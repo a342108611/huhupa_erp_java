@@ -38,21 +38,21 @@ public class PaymentMethodController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		PaymentMethod paymentMethod = paymentMethodService.find(id);
+		PaymentMethod paymentMethod = paymentMethodService.findActiveById(id);
 		return new ResultObject(paymentMethod);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		paymentMethodService.delete(id);
+		paymentMethodService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<PaymentMethod> all = paymentMethodService.findAll();
+		List<PaymentMethod> all = paymentMethodService.findAllActive();
 		return new ResultObject(all);
 	}
 }

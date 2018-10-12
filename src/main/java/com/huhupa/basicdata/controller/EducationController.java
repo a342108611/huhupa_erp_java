@@ -38,21 +38,21 @@ public class EducationController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		Education education = educationService.find(id);
+		Education education = educationService.findActiveById(id);
 		return new ResultObject(education);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		educationService.delete(id);
+		educationService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Education> all = educationService.findAll();
+		List<Education> all = educationService.findAllActive();
 		return new ResultObject(all);
 	}
 }

@@ -38,21 +38,21 @@ public class ProductionTypeController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		ProductionType productionType = productionTypeService.find(id);
+		ProductionType productionType = productionTypeService.findActiveById(id);
 		return new ResultObject(productionType);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		productionTypeService.delete(id);
+		productionTypeService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<ProductionType> all = productionTypeService.findAll();
+		List<ProductionType> all = productionTypeService.findAllActive();
 		return new ResultObject(all);
 	}
 }

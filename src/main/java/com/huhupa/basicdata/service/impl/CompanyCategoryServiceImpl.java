@@ -7,6 +7,7 @@ import com.huhupa.basicdata.dao.CompanyCategoryDao;
 import com.huhupa.basicdata.dao.CompanyDao;
 import com.huhupa.basicdata.entity.BasicMaterial;
 import com.huhupa.basicdata.entity.Company;
+import com.huhupa.basicdata.entity.CompanyAccount;
 import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.service.CompanyCategoryService;
 import com.huhupa.basicdata.service.CompanyService;
@@ -48,11 +49,22 @@ public class CompanyCategoryServiceImpl extends BaseServiceImpl<CompanyCategory,
 
 	@Override
 	public List<CompanyCategory> findAllActive() {
-		return null;
+		CompanyCategory res = new CompanyCategory();
+		res.setValid(Global.ACTIVE);
+		return companyCategoryDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		CompanyCategory res = new CompanyCategory();
+		res.setId(id);
+		CompanyCategory one = companyCategoryDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			companyCategoryDao.saveAndFlush(one);
+		}
 	}
 }

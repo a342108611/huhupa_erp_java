@@ -37,22 +37,22 @@ public class ClerkController extends BaseController {
 
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(Integer id) {
-		Clerk clerk = clerkService.find(id);
+	public ResultObject getById(String id) {
+		Clerk clerk = clerkService.findActiveById(id);
 		return new ResultObject(clerk);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
-		clerkService.delete(id);
+	public ResultObject delete(String id) {
+		clerkService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Clerk> all = clerkService.findAll();
+		List<Clerk> all = clerkService.findAllActive();
 		return new ResultObject(all);
 	}
 }

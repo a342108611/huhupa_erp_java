@@ -37,22 +37,22 @@ public class DeliveryAddressController extends BaseController {
 
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(Integer id) {
-		DeliveryAddress deliveryAddress = deliveryAddressService.find(id);
+	public ResultObject getById(String id) {
+		DeliveryAddress deliveryAddress = deliveryAddressService.findActiveById(id);
 		return new ResultObject(deliveryAddress);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
-		deliveryAddressService.delete(id);
+	public ResultObject delete(String id) {
+		deliveryAddressService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<DeliveryAddress> all = deliveryAddressService.findAll();
+		List<DeliveryAddress> all = deliveryAddressService.findAllActive();
 		return new ResultObject(all);
 	}
 }

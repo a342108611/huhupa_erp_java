@@ -37,22 +37,22 @@ public class ProductController extends BaseController {
 
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResultObject getById(Integer id) {
-		Product product = productService.find(id);
+	public ResultObject getById(String id) {
+		Product product = productService.findActiveById(id);
 		return new ResultObject(product);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
-		productService.delete(id);
+	public ResultObject delete(String id) {
+		productService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Product> all = productService.findAll();
+		List<Product> all = productService.findAllActive();
 		return new ResultObject(all);
 	}
 }

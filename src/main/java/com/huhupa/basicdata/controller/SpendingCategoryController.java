@@ -38,21 +38,21 @@ public class SpendingCategoryController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		SpendingCategory spendingCategory = spendingCategoryService.find(id);
+		SpendingCategory spendingCategory = spendingCategoryService.findActiveById(id);
 		return new ResultObject(spendingCategory);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		spendingCategoryService.delete(id);
+		spendingCategoryService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<SpendingCategory> all = spendingCategoryService.findAll();
+		List<SpendingCategory> all = spendingCategoryService.findAllActive();
 		return new ResultObject(all);
 	}
 }

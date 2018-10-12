@@ -38,21 +38,21 @@ public class CompanyCategoryController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		CompanyCategory companyCategory = companyCategoryService.find(id);
+		CompanyCategory companyCategory = companyCategoryService.findActiveById(id);
 		return new ResultObject(companyCategory);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		companyCategoryService.delete(id);
+		companyCategoryService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<CompanyCategory> all = companyCategoryService.findAll();
+		List<CompanyCategory> all = companyCategoryService.findAllActive();
 		return new ResultObject(all);
 	}
 }

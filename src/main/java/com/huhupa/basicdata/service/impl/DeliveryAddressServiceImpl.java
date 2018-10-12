@@ -7,6 +7,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.DeliveryAddressDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyAccount;
 import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.DeliveryAddress;
 import com.huhupa.basicdata.service.ClerkService;
@@ -49,11 +50,22 @@ public class DeliveryAddressServiceImpl extends BaseServiceImpl<DeliveryAddress,
 
 	@Override
 	public List<DeliveryAddress> findAllActive() {
-		return null;
+		DeliveryAddress res = new DeliveryAddress();
+		res.setValid(Global.ACTIVE);
+		return deliveryAddressDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(String id) {
-
+		if (StringUtils.isBlank(id)) {
+			throw new RuntimeException("id为空");
+		}
+		DeliveryAddress res = new DeliveryAddress();
+		res.setId(id);
+		DeliveryAddress one = deliveryAddressDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			deliveryAddressDao.saveAndFlush(one);
+		}
 	}
 }

@@ -7,6 +7,7 @@ import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.DepartmentDao;
 import com.huhupa.basicdata.entity.BasicMaterial;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Department;
 import com.huhupa.basicdata.service.ClerkService;
 import com.huhupa.basicdata.service.DepartmentService;
@@ -48,11 +49,22 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Department, Integer> 
 
 	@Override
 	public List<Department> findAllActive() {
-		return null;
+		Department res = new Department();
+		res.setValid(Global.ACTIVE);
+		return departmentDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		Department res = new Department();
+		res.setId(id);
+		Department one = departmentDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			departmentDao.saveAndFlush(one);
+		}
 	}
 }

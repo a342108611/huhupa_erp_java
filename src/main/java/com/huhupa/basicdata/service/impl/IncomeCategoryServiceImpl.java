@@ -6,6 +6,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.IncomeCategoryDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Education;
 import com.huhupa.basicdata.entity.IncomeCategory;
 import com.huhupa.basicdata.service.ClerkService;
@@ -48,11 +49,22 @@ public class IncomeCategoryServiceImpl extends BaseServiceImpl<IncomeCategory, I
 
 	@Override
 	public List<IncomeCategory> findAllActive() {
-		return null;
+		IncomeCategory res = new IncomeCategory();
+		res.setValid(Global.ACTIVE);
+		return incomeCategoryDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		IncomeCategory res = new IncomeCategory();
+		res.setId(id);
+		IncomeCategory one = incomeCategoryDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			incomeCategoryDao.saveAndFlush(one);
+		}
 	}
 }

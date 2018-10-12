@@ -6,6 +6,7 @@ import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.EducationDao;
 import com.huhupa.basicdata.entity.Clerk;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Department;
 import com.huhupa.basicdata.entity.Education;
 import com.huhupa.basicdata.service.ClerkService;
@@ -48,11 +49,22 @@ public class EducationServiceImpl extends BaseServiceImpl<Education, Integer> im
 
 	@Override
 	public List<Education> findAllActive() {
-		return null;
+		Education res = new Education();
+		res.setValid(Global.ACTIVE);
+		return educationDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		Education res = new Education();
+		res.setId(id);
+		Education one = educationDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			educationDao.saveAndFlush(one);
+		}
 	}
 }

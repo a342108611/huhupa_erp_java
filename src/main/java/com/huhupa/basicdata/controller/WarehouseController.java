@@ -38,21 +38,21 @@ public class WarehouseController extends BaseController {
 	@RequestMapping(value = { "/getById" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(Integer id) {
-		Warehouse warehouse = warehouseService.find(id);
+		Warehouse warehouse = warehouseService.findActiveById(id);
 		return new ResultObject(warehouse);
 	}
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResultObject delete(Integer id) {
-		warehouseService.delete(id);
+		warehouseService.deleteLogicById(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Warehouse> all = warehouseService.findAll();
+		List<Warehouse> all = warehouseService.findAllActive();
 		return new ResultObject(all);
 	}
 }

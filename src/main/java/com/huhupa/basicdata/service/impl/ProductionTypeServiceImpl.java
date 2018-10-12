@@ -5,6 +5,7 @@ import com.huhupa.base.dao.support.IBaseDao;
 import com.huhupa.base.service.support.impl.BaseServiceImpl;
 import com.huhupa.basicdata.dao.ProductDao;
 import com.huhupa.basicdata.dao.ProductionTypeDao;
+import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.Product;
 import com.huhupa.basicdata.entity.ProductCategory;
 import com.huhupa.basicdata.entity.ProductionType;
@@ -48,11 +49,22 @@ public class ProductionTypeServiceImpl extends BaseServiceImpl<ProductionType, I
 
 	@Override
 	public List<ProductionType> findAllActive() {
-		return null;
+		ProductionType res = new ProductionType();
+		res.setValid(Global.ACTIVE);
+		return productionTypeDao.findAll(Example.of(res));
 	}
 
 	@Override
 	public void deleteLogicById(Integer id) {
-
+		if (null == id) {
+			throw new RuntimeException("id为空");
+		}
+		ProductionType res = new ProductionType();
+		res.setId(id);
+		ProductionType one = productionTypeDao.findOne(Example.of(res));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			productionTypeDao.saveAndFlush(one);
+		}
 	}
 }
