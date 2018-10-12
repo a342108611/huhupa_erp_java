@@ -1,5 +1,6 @@
 package com.huhupa.basicdata.service.impl;
 
+import com.huhupa.base.common.Global;
 import com.huhupa.base.common.utils.StringUtils;
 import com.huhupa.base.core.token.manager.TokenManager;
 import com.huhupa.base.dao.support.IBaseDao;
@@ -15,6 +16,8 @@ import com.huhupa.common.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -70,7 +73,30 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 		}
 		Company company = new Company();
 		company.setId(id);
+		company.setValid(Global.ACTIVE);
 		Company one = companyDao.findOne(Example.of(company));
 		return one;
+	}
+
+	@Override
+	public void deleteLogicByUUID(String id) {
+		if (StringUtils.isBlank(id)) {
+			throw new RuntimeException("id为空");
+		}
+		Company company = new Company();
+		company.setId(id);
+		Company one = companyDao.findOne(Example.of(company));
+		if (one != null) {
+			one.setValid(Global.DELETE);
+			companyDao.saveAndFlush(one);
+		}
+	}
+
+	@Override
+	public List<Company> findAllActive() {
+		Company company = new Company();
+		company.setValid(Global.ACTIVE);
+		List<Company> all = companyDao.findAll(Example.of(company));
+		return all;
 	}
 }

@@ -4,6 +4,8 @@ import com.huhupa.base.service.support.IBaseService;
 import com.huhupa.basicdata.entity.BasicMaterial;
 import com.huhupa.basicdata.entity.Company;
 
+import java.util.List;
+
 /**
  * <p>
  *
@@ -14,4 +16,9 @@ import com.huhupa.basicdata.entity.Company;
  */
 public interface BasicMaterialService extends IBaseService<BasicMaterial, Integer> {
 
+    public BasicMaterial findActiveById(Integer id);
+
+    public List<BasicMaterial> findAllActive();
+
+    public void deleteLogicById(Integer id);
 }

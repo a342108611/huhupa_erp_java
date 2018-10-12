@@ -61,15 +61,15 @@ public class CompanyController extends BaseController {
 
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResultObject delete(Integer id) {
-		companyService.delete(id);
+	public ResultObject delete(String id) {
+		companyService.deleteLogicByUUID(id);
 		return new ResultObject();
 	}
 
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Company> all = companyService.findAll();
+		List<Company> all = companyService.findAllActive();
 		return new ResultObject(all);
 	}
 }
