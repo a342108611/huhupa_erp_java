@@ -8,6 +8,7 @@ import com.huhupa.basicdata.service.CompanyService;
 import com.huhupa.common.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,13 @@ public class CompanyCategoryController extends BaseController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResultObject add(CompanyCategory companyCategory) {
+	public ResultObject add(@RequestBody CompanyCategory companyCategory) {
 		return new ResultObject(companyCategoryService.save(companyCategory));
 	}
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(CompanyCategory companyCategory) {
+	public ResultObject edit(@RequestBody CompanyCategory companyCategory) {
 		CompanyCategory update = companyCategoryService.update(companyCategory);
 		return new ResultObject(update);
 	}

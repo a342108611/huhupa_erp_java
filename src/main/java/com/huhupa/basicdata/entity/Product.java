@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * <p>
@@ -38,8 +39,9 @@ public class Product extends BaseEntity {
 	/**
 	 * 所属客户 （供应商，客户，二选一）
 	 */
-	@ManyToOne
-	private Company company;
+	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@JoinTable(name = "product_company", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "company_id") })
+	private java.util.Set<Company> companys;
 
 	@ManyToOne
 	private Unit unit; // 计量单位
@@ -74,7 +76,7 @@ public class Product extends BaseEntity {
 		return "Product{" +
 				"id='" + id + '\'' +
 				", name='" + name + '\'' +
-				", company=" + company +
+				", companys=" + companys +
 				", unit=" + unit +
 				", basicMaterial=" + basicMaterial +
 				", productionType=" + productionType +
@@ -105,14 +107,6 @@ public class Product extends BaseEntity {
 		this.name = name;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
 	public Unit getUnit() {
 		return unit;
 	}
@@ -127,6 +121,14 @@ public class Product extends BaseEntity {
 
 	public void setBasicMaterial(BasicMaterial basicMaterial) {
 		this.basicMaterial = basicMaterial;
+	}
+
+	public Set<Company> getCompanys() {
+		return companys;
+	}
+
+	public void setCompanys(Set<Company> companys) {
+		this.companys = companys;
 	}
 
 	public ProductionType getProductionType() {

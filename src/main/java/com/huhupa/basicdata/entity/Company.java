@@ -73,6 +73,10 @@ public class Company extends BaseEntity {
 	 */
 	private String note;
 
+	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@JoinTable(name = "product_company", joinColumns = { @JoinColumn(name = "company_id") }, inverseJoinColumns = { @JoinColumn(name = "product_id") })
+	private java.util.Set<Product> products;
+
 	/**
 	 * 逻辑删除状态 1 未删除 0 删除
 	 */
