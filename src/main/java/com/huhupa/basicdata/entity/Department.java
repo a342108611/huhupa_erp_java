@@ -39,7 +39,7 @@ public class Department extends BaseEntity {
 	/**
 	 * 逻辑删除状态 1 未删除 0 删除
 	 */
-	private Integer valid;
+	private Integer valid = 1;
 
 	@JSONField(format = "yyyy-MM-dd")
 	private Date createdtime;

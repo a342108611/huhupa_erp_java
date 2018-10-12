@@ -34,7 +34,7 @@ public class SpendingCategory extends BaseEntity {
 	/**
 	 * 逻辑删除状态 1 未删除 0 删除
 	 */
-	private Integer valid;
+	private Integer valid = 1;
 
 	@Override
 	public String toString() {

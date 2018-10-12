@@ -74,9 +74,9 @@ public class Company extends BaseEntity {
 	private String note;
 
 	/**
-	 * 逻辑删除状态 0 未删除 1 删除
+	 * 逻辑删除状态 1 未删除 0 删除
 	 */
-	private Integer valid;
+	private Integer valid = 1;
 
 	@JSONField(format = "yyyy-MM-dd")
 	private Date createdtime;
@@ -88,6 +88,22 @@ public class Company extends BaseEntity {
 
 	private String modifieduser;
 
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
 	@Override
 	public String toString() {
 		return "Company{" +
@@ -98,7 +114,9 @@ public class Company extends BaseEntity {
 				", contact='" + contact + '\'' +
 				", phone='" + phone + '\'' +
 				", email='" + email + '\'' +
+				", type=" + type +
 				", address='" + address + '\'' +
+				", paymentMethod=" + paymentMethod +
 				", note='" + note + '\'' +
 				", valid=" + valid +
 				", createdtime=" + createdtime +

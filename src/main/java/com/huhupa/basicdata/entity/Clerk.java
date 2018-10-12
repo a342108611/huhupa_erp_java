@@ -102,9 +102,9 @@ public class Clerk extends BaseEntity {
 	private Department department; // 部门
 
 	/**
-	 * 逻辑删除状态 0 未删除 1 删除
+	 * 逻辑删除状态 1 未删除 0 删除
 	 */
-	private Integer valid;
+	private Integer valid = 1;
 
 	@JSONField(format = "yyyy-MM-dd")
 	private Date createdtime;

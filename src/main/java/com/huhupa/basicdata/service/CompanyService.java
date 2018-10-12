@@ -13,4 +13,5 @@ import com.huhupa.basicdata.entity.Company;
  */
 public interface CompanyService extends IBaseService<Company, Integer> {
 
+    Company save(Company company, Integer companyCategoryId, Integer paymentMethodId);
 }

@@ -27,7 +27,7 @@ public interface IBaseService<T, ID extends Serializable> {
 
     public abstract boolean exists(ID id);
 
-    public abstract void save(T entity);
+    public abstract T save(T entity);
 
     public abstract T update(T entity);
 

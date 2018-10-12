@@ -54,7 +54,10 @@ public class Product extends BaseEntity {
 
 	private String note; // 备注
 
-	private Boolean valid; // 删除标志
+	/**
+	 * 逻辑删除状态 1 未删除 0 删除
+	 */
+	private Integer valid = 1;
 
 	@JSONField(format = "yyyy-MM-dd")
 	private Date createdtime;
@@ -158,11 +161,11 @@ public class Product extends BaseEntity {
 		this.note = note;
 	}
 
-	public Boolean getValid() {
+	public Integer getValid() {
 		return valid;
 	}
 
-	public void setValid(Boolean valid) {
+	public void setValid(Integer valid) {
 		this.valid = valid;
 	}
 

@@ -64,12 +64,12 @@ public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializa
     }
 
     @Override
-    public void save(T entity) {
-        getBaseDao().save(entity);
+    public T save(T entity) {
+        return getBaseDao().save(entity);
     }
 
-    public void save(Iterable<T> entitys) {
-        getBaseDao().save(entitys);
+    public List<T> save(Iterable<T> entitys) {
+        return getBaseDao().save(entitys);
     }
 
     @Override
