@@ -42,4 +42,6 @@ public interface IBaseService<T, ID extends Serializable> {
     public abstract void delete(T entity);
 
     public List<T> findList(Specification<T> spec, Sort sort);
+
+    void validNotNullStringParams(String... param);
 }

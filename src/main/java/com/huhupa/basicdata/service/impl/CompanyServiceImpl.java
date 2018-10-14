@@ -68,9 +68,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 
 	@Override
 	public Company findByUUID(String id) {
-		if (StringUtils.isBlank(id)) {
-			throw new RuntimeException("查询的id为空");
-		}
+		validNotNullStringParams(id);
 		Company company = new Company();
 		company.setId(id);
 		company.setValid(Global.ACTIVE);
@@ -80,9 +78,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 
 	@Override
 	public void deleteLogicByUUID(String id) {
-		if (StringUtils.isBlank(id)) {
-			throw new RuntimeException("id为空");
-		}
+		validNotNullStringParams(id);
 		Company company = new Company();
 		company.setId(id);
 		Company one = companyDao.findOne(Example.of(company));
@@ -98,5 +94,21 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 		company.setValid(Global.ACTIVE);
 		List<Company> all = companyDao.findAll(Example.of(company));
 		return all;
+	}
+
+	@Override
+	public Company update(Company company, Integer companyCategoryId, Integer paymentMethodId) {
+		validNotNullStringParams(company.getId());
+		CompanyCategory companyCategory = null;
+		if (null != companyCategoryId) {
+			companyCategory = companyCategoryDao.findOne(companyCategoryId);
+		}
+		PaymentMethod paymentMethod = null;
+		if (null != paymentMethodId) {
+			paymentMethod = paymentMethodDao.findOne(paymentMethodId);
+		}
+		company.setCompanyCategory(companyCategory);
+		company.setPaymentMethod(paymentMethod);
+		return companyDao.saveAndFlush(company);
 	}
 }

@@ -22,4 +22,6 @@ public interface CompanyService extends IBaseService<Company, Integer> {
     void deleteLogicByUUID(String id);
 
     List<Company> findAllActive();
+
+    Company update(Company company, Integer companyCategoryId, Integer paymentMethodId);
 }

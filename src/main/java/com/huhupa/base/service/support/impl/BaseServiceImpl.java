@@ -1,5 +1,6 @@
 package com.huhupa.base.service.support.impl;
 
+import com.huhupa.base.common.utils.StringUtils;
 import com.huhupa.base.dao.support.IBaseDao;
 import com.huhupa.base.entity.support.BaseEntity;
 import com.huhupa.base.service.support.IBaseService;
@@ -119,4 +120,14 @@ public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializa
         return getBaseDao().findAll(spec, pageable);
     }
 
+    @Override
+    public void validNotNullStringParams(String... param) {
+        if (param.length > 0) {
+            for(int i=0; i<param.length; i++){
+                if (StringUtils.isBlank(param[i])) {
+                    throw new RuntimeException("参数不能为空");
+                }
+            }
+        }
+    }
 }

@@ -26,11 +26,9 @@ public class CompanyController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public ResultObject add(@RequestBody Map<String, Object> map) {
-		System.out.println("(Integer) map.get(\"companyCategoryId\"):" +  Integer.parseInt(map.get("companyCategoryId").toString()));
-		System.out.println("(Integer) map.get(\"paymentMethodId\")" +  Integer.parseInt(map.get("paymentMethodId").toString()));
-		Company save = companyService.save(parameterTransformation(map), Integer.parseInt(map.get("companyCategoryId").toString()),
-				Integer.parseInt(map.get("paymentMethodId").toString()));
-		return new ResultObject(save);
+		Integer companyCategoryId = map.get("companyCategoryId") == null? null: Integer.parseInt(map.get("companyCategoryId").toString());
+		Integer paymentMethodId = map.get("paymentMethodId") == null? null: Integer.parseInt(map.get("paymentMethodId").toString());
+		return new ResultObject(companyService.save(parameterTransformation(map),companyCategoryId, paymentMethodId));
 	}
 
 	private Company parameterTransformation(Map<String, Object> map) {
@@ -49,16 +47,17 @@ public class CompanyController extends BaseController {
 
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResultObject edit(@RequestBody Company company) {
-		Company update = companyService.update(company);
-		return new ResultObject(update);
+	public ResultObject edit(@RequestBody Map<String, Object> map) {
+		Integer companyCategoryId = map.get("companyCategoryId") == null? null: Integer.parseInt(map.get("companyCategoryId").toString());
+		Integer paymentMethodId = map.get("paymentMethodId") == null? null: Integer.parseInt(map.get("paymentMethodId").toString());
+		return new ResultObject(companyService.update(parameterTransformation(map),
+				companyCategoryId, paymentMethodId));
 	}
 
 	@RequestMapping(value = { "/getById/{id}" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getById(@PathVariable String id) {
-		Company company = companyService.findByUUID(id);
-		return new ResultObject(company);
+		return new ResultObject(companyService.findByUUID(id));
 	}
 
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.DELETE)
@@ -71,7 +70,6 @@ public class CompanyController extends BaseController {
 	@RequestMapping(value = { "/getAll" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResultObject getAll() {
-		List<Company> all = companyService.findAllActive();
-		return new ResultObject(all);
+		return new ResultObject(companyService.findAllActive());
 	}
 }
