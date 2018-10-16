@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * <p>
@@ -46,19 +47,54 @@ public class Company extends BaseEntity {
 	@ManyToOne
 	private CompanyCategory companyCategory;
 
-	/**
-	 * 客户联系人
-	 */
-	private String contact;
-
-	private String phone;
-
-	private String email;
+//	/**
+//	 * 客户联系人
+//	 */
+//	private String contact;
+//
+//	private String phone;
+//
+//	private String email;
 
 	/**
 	 * 公司类型：1 为供应商，2 为客户
 	 */
 	private Integer type;
+
+	/**
+	 * 期初应收款
+	 */
+	private Double initialReceivables;
+	/**
+	 * 期初预收款
+	 */
+	private Double initialAdvanceCollection;
+	/**
+	 * 纳税人识别号
+	 */
+	private String taxpayerIdentificationNumber;
+
+	/**
+	 * 开户银行
+	 */
+	private String openAccountBank;
+
+	/**
+	 * 银行账号
+	 */
+	private String bankAccount;
+
+	/**
+	 * 销售人员
+	 */
+	@ManyToOne
+	private Clerk salesStaff;
+
+	/**
+	 * 公司联系人
+	 */
+	@OneToMany
+	private Set<CompanyContact> companyContacts;
 
 	/**
 	 * 地址
@@ -92,22 +128,6 @@ public class Company extends BaseEntity {
 
 	private String modifieduser;
 
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
 	@Override
 	public String toString() {
 		return "Company{" +
@@ -115,13 +135,17 @@ public class Company extends BaseEntity {
 				", name='" + name + '\'' +
 				", shortName='" + shortName + '\'' +
 				", companyCategory=" + companyCategory +
-				", contact='" + contact + '\'' +
-				", phone='" + phone + '\'' +
-				", email='" + email + '\'' +
 				", type=" + type +
+				", initialReceivables=" + initialReceivables +
+				", initialAdvanceCollection=" + initialAdvanceCollection +
+				", taxpayerIdentificationNumber='" + taxpayerIdentificationNumber + '\'' +
+				", openAccountBank='" + openAccountBank + '\'' +
+				", bankAccount='" + bankAccount + '\'' +
+				", salesStaff=" + salesStaff +
 				", address='" + address + '\'' +
 				", paymentMethod=" + paymentMethod +
 				", note='" + note + '\'' +
+				", products=" + products +
 				", valid=" + valid +
 				", createdtime=" + createdtime +
 				", modifiedtime=" + modifiedtime +
@@ -162,28 +186,60 @@ public class Company extends BaseEntity {
 		this.companyCategory = companyCategory;
 	}
 
-	public String getContact() {
-		return contact;
+	public Integer getType() {
+		return type;
 	}
 
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Double getInitialReceivables() {
+		return initialReceivables;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setInitialReceivables(Double initialReceivables) {
+		this.initialReceivables = initialReceivables;
 	}
 
-	public String getEmail() {
-		return email;
+	public Double getInitialAdvanceCollection() {
+		return initialAdvanceCollection;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setInitialAdvanceCollection(Double initialAdvanceCollection) {
+		this.initialAdvanceCollection = initialAdvanceCollection;
+	}
+
+	public String getTaxpayerIdentificationNumber() {
+		return taxpayerIdentificationNumber;
+	}
+
+	public void setTaxpayerIdentificationNumber(String taxpayerIdentificationNumber) {
+		this.taxpayerIdentificationNumber = taxpayerIdentificationNumber;
+	}
+
+	public String getOpenAccountBank() {
+		return openAccountBank;
+	}
+
+	public void setOpenAccountBank(String openAccountBank) {
+		this.openAccountBank = openAccountBank;
+	}
+
+	public String getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(String bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public Clerk getSalesStaff() {
+		return salesStaff;
+	}
+
+	public void setSalesStaff(Clerk salesStaff) {
+		this.salesStaff = salesStaff;
 	}
 
 	public String getAddress() {
@@ -194,12 +250,28 @@ public class Company extends BaseEntity {
 		this.address = address;
 	}
 
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
 	public String getNote() {
 		return note;
 	}
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 	public Integer getValid() {

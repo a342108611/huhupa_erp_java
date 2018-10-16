@@ -5,9 +5,11 @@ import com.huhupa.base.common.utils.StringUtils;
 import com.huhupa.base.core.token.manager.TokenManager;
 import com.huhupa.base.dao.support.IBaseDao;
 import com.huhupa.base.service.support.impl.BaseServiceImpl;
+import com.huhupa.basicdata.dao.ClerkDao;
 import com.huhupa.basicdata.dao.CompanyCategoryDao;
 import com.huhupa.basicdata.dao.CompanyDao;
 import com.huhupa.basicdata.dao.PaymentMethodDao;
+import com.huhupa.basicdata.entity.Clerk;
 import com.huhupa.basicdata.entity.Company;
 import com.huhupa.basicdata.entity.CompanyCategory;
 import com.huhupa.basicdata.entity.PaymentMethod;
@@ -39,13 +41,16 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 	@Autowired
 	private PaymentMethodDao paymentMethodDao;
 
+	@Autowired
+	private ClerkDao clerkDao;
+
 	@Override
 	public IBaseDao<Company, Integer> getBaseDao() {
 		return companyDao;
 	}
 
 	@Override
-	public Company save(Company company, Integer companyCategoryId, Integer paymentMethodId) {
+	public Company save(Company company, Integer companyCategoryId, Integer paymentMethodId, String salesStaffId) {
 		if (null == company) {
 			throw new RuntimeException("要保存的公司为空");
 		}
@@ -57,7 +62,14 @@ public class CompanyServiceImpl extends BaseServiceImpl<Company, Integer> implem
 		if (null != paymentMethodId) {
 			paymentMethod = paymentMethodDao.findOne(paymentMethodId);
 		}
+		Clerk clerk = new Clerk();
+		clerk.setId(salesStaffId);
+		Clerk salesStaff = null;
+		if (null != paymentMethodId) {
+			salesStaff = clerkDao.findOne(Example.of(clerk));
+		}
 		company.setCreatedtime(DateUtil.getNow());
+		company.setSalesStaff(salesStaff);
 		company.setModifiedtime(DateUtil.getNow());
 		company.setCreateduser(TokenManager.getCurrentUser().getUserName());
 		company.setModifieduser(TokenManager.getCurrentUser().getUserName());

@@ -28,7 +28,8 @@ public class CompanyController extends BaseController {
 	public ResultObject add(@RequestBody Map<String, Object> map) {
 		Integer companyCategoryId = map.get("companyCategoryId") == null? null: Integer.parseInt(map.get("companyCategoryId").toString());
 		Integer paymentMethodId = map.get("paymentMethodId") == null? null: Integer.parseInt(map.get("paymentMethodId").toString());
-		return new ResultObject(companyService.save(parameterTransformation(map),companyCategoryId, paymentMethodId));
+		String salesStaffId = map.get("salesStaffId") == null? null: (String)map.get("salesStaffId");
+		return new ResultObject(companyService.save(parameterTransformation(map),companyCategoryId, paymentMethodId, salesStaffId));
 	}
 
 	private Company parameterTransformation(Map<String, Object> map) {
@@ -36,12 +37,17 @@ public class CompanyController extends BaseController {
 		company.setId((String) map.get("id"));
 		company.setName((String) map.get("name"));
 		company.setShortName((String) map.get("shortName"));
-		company.setContact((String) map.get("contact"));
-		company.setPhone((String) map.get("phone"));
-		company.setEmail((String) map.get("email"));
 		company.setAddress((String) map.get("address"));
 		company.setNote((String) map.get("note"));
 		company.setType(Integer.parseInt(map.get("type").toString()));
+
+		company.setInitialReceivables((Double) map.get("initialReceivables"));
+		company.setInitialAdvanceCollection((Double) map.get("initialAdvanceCollection"));
+		company.setTaxpayerIdentificationNumber((String) map.get("taxpayerIdentificationNumber"));
+		company.setOpenAccountBank((String) map.get("openAccountBank"));
+		company.setBankAccount((String) map.get("bankAccount"));
+
+
 		return company;
 	}
 

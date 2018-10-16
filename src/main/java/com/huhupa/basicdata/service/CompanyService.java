@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CompanyService extends IBaseService<Company, Integer> {
 
-    Company save(Company company, Integer companyCategoryId, Integer paymentMethodId);
+    Company save(Company company, Integer companyCategoryId, Integer paymentMethodId, String salesStaffId);
 
     Company findByUUID(String id);
 
