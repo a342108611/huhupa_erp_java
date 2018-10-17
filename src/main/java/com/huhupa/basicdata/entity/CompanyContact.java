@@ -28,7 +28,7 @@ public class CompanyContact extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
-	private String id;
+	private Integer id;
 
 	/**
 	 * 姓名
