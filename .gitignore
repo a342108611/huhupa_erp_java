@@ -1,8 +1,38 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+.settings
+mvnw
+mvnw.cmd
+
+**/**.log
+base/*
+
+### IntelliJ IDEA ###
 .idea
-.svn
-hrm.iml
-target
-erp.iml
-base/app/*.log
-sso.iml
-sangfor-sso.iml
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/

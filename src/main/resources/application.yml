@@ -1,0 +1,16 @@
+server:
+  port: 80
+  context-path: /
+  
+
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://118.126.96.240:3306/db_jxc?useUnicode=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: sangfor123
+   jpa:
+     hibernate.ddl-auto: update
+     show-sql: true
+   thymeleaf:
+    cache: false
