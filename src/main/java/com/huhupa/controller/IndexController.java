@@ -1,7 +1,9 @@
 package com.huhupa.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  * 首页或者权限url跳转控制器
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
-
 	
     /**
      * 网站根目录请求
@@ -20,6 +21,4 @@ public class IndexController {
     public String root() {
     	return "redirect:/login.html";
     }
-    
- 
 }

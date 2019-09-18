@@ -29,6 +29,9 @@ public class SystemLicense {
 	@GeneratedValue
 	private Integer id; // 编号
 	
+	@Column(length=100)
+	private String productName; // 属于什么授权码
+	
 	@Column(columnDefinition="text COMMENT '字典名'")
 	private String license; // 授权码字符串
 	
@@ -60,9 +63,17 @@ public class SystemLicense {
 		this.license = license;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	@Override
 	public String toString() {
-		return "SystemLicense [id=" + id + ", license=" + license + "]";
+		return "SystemLicense [id=" + id + ", productName=" + productName + ", license=" + license + "]";
 	}
 
 }

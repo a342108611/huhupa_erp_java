@@ -14,3 +14,7 @@ spring:
      show-sql: true
    thymeleaf:
     cache: false
+huhupa:
+  jwt:
+    secret: asdfasdfasfdvcdfghlkjlkajlk53a45fw546as5d4f54fga4dsf
+    expire: 30

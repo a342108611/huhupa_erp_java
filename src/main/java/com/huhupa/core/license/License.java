@@ -1,14 +1,14 @@
 package com.huhupa.core.license;
 
 import java.util.Date;
+import java.util.List;
 
-import antlr.collections.List;
 
 public class License {
 
 	private String productName;  // 产品名称 
 	private String version; // 授权码版本
-	private String type;  // 授权码类型
+	private String type;  // 授权码类型 : 试用 ：try 购买：buy
 	private Date expiry;  // 到期时间
 	private String macAddress; // 电脑mac地址
 	private String signature; // 签名
