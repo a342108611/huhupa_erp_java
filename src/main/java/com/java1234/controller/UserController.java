@@ -65,7 +65,7 @@ public class UserController {
     		map.put("errorInfo", "请输入验证码！");
     		return map;
     	}
-    	if(!session.getAttribute("checkcode").equals(imageCode)){
+    	if(!session.getAttribute("checkcode").equals(imageCode.toUpperCase())){
     		map.put("success", false);
     		map.put("errorInfo", "验证码输入错误！");
     		return map;
