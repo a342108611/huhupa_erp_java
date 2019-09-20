@@ -72,6 +72,7 @@ public class LicenseController {
     @RequestMapping("/api/v1/license/register")
     @ResponseBody
     public Map<String, Object> registerLicense(@RequestBody Map<String, Object> params) {
+    	System.out.println("registerLicense：" + params);
     	Map<String, Object> resultMap = new HashMap<String, Object>();
     	String license = params.get("license").toString();
     	try {

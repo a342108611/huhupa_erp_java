@@ -32,17 +32,15 @@ public class CommonIntercepter implements HandlerInterceptor {
 		return false;
 	}
 
-
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("request uri:" + request.getRequestURI());
+    	System.out.println("request uri:" + request.getRequestURI());
         if (isAccessWhitelist(request.getRequestURI())) {
         	return true;
         }
-        SystemLicense existLicense = licenseService.getExistLicense("ERP");
-        if (existLicense == null || !licenseService.checkLicense(existLicense.getLicense())) {
-        	System.out.println("重定向");
+        if (!licenseService.validateErpLicense()) {
+        	System.out.println("重定向:" + request.getRequestURI());
 //        	response.sendRedirect("/license.html");
         	redirect(request, response);
         	return false;
@@ -60,7 +58,7 @@ public class CommonIntercepter implements HandlerInterceptor {
             //告诉ajax我是重定向
             response.setHeader("REDIRECT", "REDIRECT");
             //告诉ajax我重定向的路径
-            response.setHeader("CONTENTPATH", basePath + "/license.html");
+            response.setHeader("CONTEXTPATH", basePath + "/license.html");
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }else{
             response.sendRedirect(basePath + "/license.html");

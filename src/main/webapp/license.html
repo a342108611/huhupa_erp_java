@@ -54,8 +54,8 @@ Fixed Navigation
 				<h2>欢迎使用 优优当 进销存管理系统</h2>
 				<nav aria-label="breadcrumb mx-auto" role="navigation">
 				  <ol class="breadcrumb">
-				    <li class="breadcrumb-item">激活序列号</li>
-				    <li class="breadcrumb-item active" aria-current="page">输入</li>
+				    <li class="breadcrumb-item">您还未输入序列号或序列号已过期</li>
+				    <li class="breadcrumb-item active" aria-current="page">激活序列号</li>
 				  </ol>
 				</nav>
 			</div>
@@ -68,16 +68,23 @@ Fixed Navigation
 	<section class="pricing-table  section" id="pricing" style="height: 100%">
 		<div class="container">
 			<div class="row">
+					<div class="col">
+						<div id="license-message" class="title text-center" style="display: none;">
+							<h2 style="color: red;">激活成功，3秒后将跳转到登陆页面...</h2>
+						</div>
+					</div>
+				</div>
+			<div class="row">
 				<div class="col">
 					<div class="title text-center">
-						<h4>输入序列号</h4>
+						<h3>输入序列号</h3>
 						<div></div>
 						<div class="form-group">
 							<textarea rows="4" placeholder="序列号" class="form-control" name="message" id="license"></textarea>	
 						</div>
 						<span class="border"></span>
 						<div id="cf-submit">
-							<input type="button" id="contact-submit" class="btn btn-transparent" value="提交">
+							<input type="button" id="contact-submit" class="btn btn-transparent" value="提交激活">
 						</div>	
 					</div>
 				</div>
@@ -116,14 +123,26 @@ Fixed Navigation
 	$(document).ready(function() {
 	 
 	  $("#contact-submit").click(function(){
-		  console.log("提交序列号")
-		  $.post("/api/v1/license/register",{license:$("#license").val()},function(result){
-				if(result.success){
-					window.location.href="/main.html";	
-				}else{
-					alert(result.errorInfo);
-				}
-		});
+		  $.ajax({
+			  url: "/api/v1/license/register",
+			  type:"POST",
+			  data: JSON.stringify({"license": $("#license").val()}),
+			  contentType:"application/json; charset=utf-8",
+			  dataType:"json",
+			  success: function(result){
+				  console.log("result:", result)
+				  if(result.status){
+					  //$("#license-message").css({"display:": "block"})
+					  $("#license-message").attr({"style": "display: block"})
+					  setTimeout(function(){
+						window.location.href="/login.html";
+					  },3000)
+					}else{
+						alert("激活失败");
+					}
+			  }
+		  })
+		 
 	  });
 	});
 

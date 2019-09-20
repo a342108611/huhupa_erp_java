@@ -21,6 +21,13 @@ public interface LicenseService {
      */  
     boolean validate(License license) throws Exception ; 
     
+    /**
+	 * true 有效 false 无效
+	 * @return true 有效
+	 * @throws Exception
+	 */
+    boolean validateErpLicense() throws Exception;
+    
     boolean checkLicense(String licenseCode) throws Exception;
 
 	void registerLicense(String license);

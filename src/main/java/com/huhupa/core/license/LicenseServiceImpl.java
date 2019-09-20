@@ -24,7 +24,9 @@ public class LicenseServiceImpl implements LicenseService {
 	
 	@Resource
 	private SystemLicenseRepository systemLicenseRepository;
-
+	
+	private License erpLicense;
+	
 	@Override
 	public String generateKey(String productName, String version, String type, Integer days,
 			String macAddress, List module, Integer userCountLimit) throws Exception {
@@ -50,6 +52,21 @@ public class LicenseServiceImpl implements LicenseService {
 	public boolean validate(License license) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean validateErpLicense() throws Exception {
+		License erpLicense2 = getErpLicense();
+		if (null == erpLicense2) {
+			SystemLicense existLicense = getExistLicense("ERP");
+			if (null != existLicense) {
+				erpLicense2 = decodeLicense(existLicense.getLicense());
+				setErpLicense(erpLicense2);
+			} else {
+				return false;
+			}
+		}
+		return !isExpire(erpLicense2);
 	}
 	
 	
@@ -120,6 +137,14 @@ public class LicenseServiceImpl implements LicenseService {
 			systemLicenseRepository.saveAndFlush(existLicense);
 		}
 		
+	}
+	
+	public License getErpLicense() {
+		return erpLicense;
+	}
+	
+	public void setErpLicense(License erpLicense) {
+		this.erpLicense = erpLicense;
 	}
 
 }
