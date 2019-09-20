@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="Bingo One page parallax responsive HTML Template ">
+  <title>序列号激活</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="static/images/favicon.png" />
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="static/bootstrap3/css/bootstrap2.min.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="static/css/style2.css">
+
+</head>
+
+<body id="body">
+ <!--
+Fixed Navigation
+==================================== -->
+<section class="header  navigation">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <nav class="navbar navbar-expand-md">
+               <a class="navbar-brand" style="color: #fff">
+                  优优当 进销存管理系统
+               </a>  
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="tf-ion-android-menu"></span>
+            </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="#">激活序列号 <span class="sr-only">(current)</span></a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      
+   </div>
+</div>
+</div>
+</section>
+
+<section class="single-page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>欢迎使用 优优当 进销存管理系统</h2>
+				<nav aria-label="breadcrumb mx-auto" role="navigation">
+				  <ol class="breadcrumb">
+				    <li class="breadcrumb-item">激活序列号</li>
+				    <li class="breadcrumb-item active" aria-current="page">输入</li>
+				  </ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Start Pricing section
+		=========================================== -->
+	<section class="pricing-table  section" id="pricing" style="height: 100%">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="title text-center">
+						<h4>输入序列号</h4>
+						<div></div>
+						<div class="form-group">
+							<textarea rows="4" placeholder="序列号" class="form-control" name="message" id="license"></textarea>	
+						</div>
+						<span class="border"></span>
+						<div id="cf-submit">
+							<input type="button" id="contact-submit" class="btn btn-transparent" value="提交">
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>   	<!-- End container -->
+	</section>   <!-- End section -->
+
+
+<footer id="footer" class="bg-one">
+  <div class="footer-bottom">
+    <h5>Copyright © 2017-2019 朱勇军  版权所有</h5>
+    <h6>联系我们：tmzyj2014@163.com 或 微信/QQ同号：342108611</h6>
+  </div>
+</footer> <!-- end footer -->
+    
+    <!-- Main jQuery 
+    <script src="static/plugins/jquery/dist/jquery.min.js"></script>-->
+    <script src="static/js/jquery.js"></script>
+    <!-- Bootstrap 3.7 
+    <script src="static/plugins/bootstrap/dist/js/popper.min.js"></script>
+    <script src="static/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Parallax 
+    <script src="static/plugins/parallax/jquery.parallax-1.1.3.js"></script>
+    <!-- lightbox 
+    <script src="static/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+    <!-- Owl Carousel 
+    <script src="static/plugins/slick-carousel/slick/slick.min.js"></script>
+    <!-- Portfolio Filtering 
+    <script src="static/plugins/mixitup/dist/mixitup.min.js"></script>
+    <!-- Smooth Scroll js
+    <script src="static/plugins/smooth-scroll/dist/js/smooth-scroll.min.js"></script> -->
+    
+    <!-- Custom js -->
+    <script src="static/js/custom-script.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	 
+	  $("#contact-submit").click(function(){
+		  console.log("提交序列号")
+		  $.post("/api/v1/license/register",{license:$("#license").val()},function(result){
+				if(result.success){
+					window.location.href="/main.html";	
+				}else{
+					alert(result.errorInfo);
+				}
+		});
+	  });
+	});
+
+</script>
+  </body>
+  </html>

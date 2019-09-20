@@ -47,7 +47,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
-//        filterChainDefinitionMap.put("/main.html", "anon");
+        filterChainDefinitionMap.put("/license.html", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/api/v1/license/register", "anon");
         filterChainDefinitionMap.put("/drawImage", "anon");
