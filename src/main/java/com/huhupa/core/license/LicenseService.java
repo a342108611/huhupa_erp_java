@@ -24,4 +24,11 @@ public interface LicenseService {
     boolean checkLicense(String licenseCode) throws Exception;
 
 	void registerLicense(String license);
+	
+	/**
+	 * 过期了 返回true，没过期 返回false
+	 * @param license
+	 * @return true 过期 
+	 */
+	boolean isExpire(License license);
 }

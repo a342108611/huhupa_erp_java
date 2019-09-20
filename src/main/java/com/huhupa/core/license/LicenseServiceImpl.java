@@ -52,11 +52,39 @@ public class LicenseServiceImpl implements LicenseService {
 		return false;
 	}
 	
+	
+	/**
+	 * 
+	 * 返回 false 代表无效
+	 * 
+	 * return true 有效
+	 */
 	@Override
 	public boolean checkLicense(String licenseCode) throws Exception {
 		License decodeLicense = decodeLicense(licenseCode);
-		System.out.println("decodeLicense:"+decodeLicense);
+		if (!isExpire(decodeLicense)) {
+			return true;
+		}
 		return false;
+	}
+	
+	/**
+	 * 过期了 返回true，没过期 返回false
+	 * @param license
+	 * @return true 过期 
+	 */
+	@Override
+	public boolean isExpire(License license) {
+		if (null != license) {
+			Date expiry = license.getExpiry();
+			Date now = new Date();
+			if (expiry.after(now)) {
+				System.out.println("未过期expiry： " + expiry);
+				System.out.println("未过期 ");
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private License decodeLicense(String token) {
