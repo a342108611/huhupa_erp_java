@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huhupa.core.license.License;
 import com.huhupa.core.license.LicenseService;
 
 /**
@@ -68,6 +69,43 @@ public class LicenseController {
 		}
     	return resultMap;
     }
+    
+    @RequestMapping("/api/v1/getLicense")
+    @ResponseBody
+    public Map<String, Object> getErpLicense() {
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	License erpLicense = licenseService.getErpLicense();
+    	resultMap.put("status", true);
+		resultMap.put("msg", "ok");
+		resultMap.put("data", erpLicense);
+    	return resultMap;
+    }
+    
+    @RequestMapping("/api/v1/license/apply")
+    @ResponseBody
+    public Map<String, Object> applyLicense(@RequestBody Map<String, Object> params) {
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	String productName = params.get("productName").toString();
+    	String version = params.get("version").toString();
+    	String type = params.get("type").toString();
+    	Integer days = Integer.parseInt(params.get("days").toString());
+    	String macAddress = params.get("macAddress").toString();
+    	List module = (List)params.get("module");
+    	Integer userCountLimit = Integer.parseInt(params.get("userCountLimit").toString());
+    	try {
+    		resultMap.put("status", true);
+    		resultMap.put("msg", "ok");
+			String generateKey = licenseService.generateKey(productName, version, type, days, macAddress, module, userCountLimit);
+			resultMap.put("license", generateKey);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			resultMap.put("status", false);
+    		resultMap.put("msg", "error");
+		}
+    	return resultMap;
+    }
+    
     
     @RequestMapping("/api/v1/license/register")
     @ResponseBody

@@ -15,6 +15,16 @@
 	    background: url(/static/images/clock.gif) no-repeat;
 	    font-size: 14px;
 	}
+
+	.contact-us {
+		float:right;
+	    width: 420px;
+	    height: 30px;
+	    padding-left: 300px;
+	    padding-top: 40px;
+	    color: rgb(0, 76, 126);
+	    font-size: 14px;
+	}
 	
 	.userInfo{
 		float:left;
@@ -26,7 +36,33 @@
 <script type="text/javascript" src="/static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <script src="static/js/common.js"></script>
+<script src="static/js/date.js"></script>
 <script type="text/javascript">
+
+function getLicense(){
+	$.ajax({
+		  url: "/api/v1/getLicense",
+		  type:"GET",
+		  contentType:"application/json; charset=utf-8",
+		  dataType:"json",
+		  success: function(result){
+			  if(result.status){
+				  let license = result.data;
+				  let fmtDate = formatDate(new Date(license.expiry));
+				  let html = "序列号授权类型：" + formatType(license.type) + ", 授权到期时间：" + fmtDate + "  联系我们：tmzyj2014@163.com 或 微信/QQ同号：342108611";
+				  $("#license-info").html(html);
+				}
+		  }
+	  })
+}
+
+function formatType(licenseType){
+	if (licenseType == "buy"){
+		return "正式版"
+	} else {
+		return "试用版"
+	}
+}
 	
 	var url;
 	
@@ -46,7 +82,7 @@
 	window.setInterval("showTime()",1000);
 	
 	$(document).ready(function() {
-		
+		getLicense();
 		var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:99%' src='/common/stockSearch.html'></iframe>";
 		$("#tabs").tabs("add",{
 			title:"首页",
@@ -225,6 +261,7 @@
 			<td style="background:url(/static/images/top_center.jpg)">
 				<div id="userInfo" class="userInfo"></div>
 			</td>
+			<td style="background:url(/static/images/top_center.jpg)"> <div class="contact-us"></div></td>
 			<td valign="bottom" width="544px" style="background:url(/static/images/top_right.jpg)">
 				<div id="clock" class="clock"></div>
 			</td>
@@ -241,7 +278,7 @@
 </div>
 <div region="south" style="height: 50px;padding: 5px" align="center">
 	Copyright © 2017-2019 朱勇军  版权所有
-	<div>联系我们：tmzyj2014@163.com 或 微信/QQ同号：342108611</div>
+	<div id="license-info"></div>
 </div>
 
 

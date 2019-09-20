@@ -38,4 +38,6 @@ public interface LicenseService {
 	 * @return true 过期 
 	 */
 	boolean isExpire(License license);
+	
+	License getErpLicense();
 }

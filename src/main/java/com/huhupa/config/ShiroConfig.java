@@ -49,7 +49,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/license.html", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
-        filterChainDefinitionMap.put("/api/v1/license/register", "anon");
+        filterChainDefinitionMap.put("/api/v1/**", "anon");
         filterChainDefinitionMap.put("/drawImage", "anon");
 
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了

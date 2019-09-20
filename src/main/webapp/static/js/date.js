@@ -30,3 +30,8 @@ function formatZero(n){
 		return n;
 	}
 }
+
+function formatDate(date) {
+	var month=(date.getMonth()+1)<10?(date.getMonth()+1):(date.getMonth()+1);
+	return date.getFullYear()+"-"+formatZero(month)+"-"+formatZero(date.getDate());
+}

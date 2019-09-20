@@ -13,7 +13,8 @@ public interface Constant {
 			"/api/v1/license/register",
 			"/drawImage",
 			"/logout",
-			"/error"
+			"/error",
+			"/api/v1/license/apply"
 			};
 
 }
